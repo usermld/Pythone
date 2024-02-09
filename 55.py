@@ -9,13 +9,13 @@
     - открыть файл на чтение (r) +++
     - считать файл +++
     - вывести на экран +++
-4. поиск контакта:
+4. поиск контакта: +++
     - выбор варианта поиска +++
     - запросить данные для поиска +++
     - открыть файл на чтение +++
-    - считываем даные файла, сохраняем их в переменную 
-    - осуществляем поск контакт
-    - вывести на экран найденый контакт
+    - считываем даные файла, сохраняем их в переменную +++
+    - осуществляем поск контакт +++
+    - вывести на экран найденый контакт +++
 5. Создание UI (пользовательского интерфейса): +++
     - вывести меню на экран +++
     - запросить у пользователя вариант действия +++
@@ -61,6 +61,15 @@ def print_contacts():
     contacts_list = contacts_str.rstrip().split("\n\n")
     for n, contact in enumerate(contacts_list, 1):
         print(n, contact)
+        
+
+def copy_contact():
+    var = input("Выберите название файла в которое хотите скопировать контакты: ")
+    with open(f"{var}.txt", "a", encoding="utf-8") as copy_file:
+        with open("phone_book.txt", "r", encoding="utf-8") as file:
+            copy_contact = file.read()
+            copy_file.write(copy_contact)
+    print("Контакты успешно скопированны!\n")
 
 
 def search_contackt():
@@ -92,6 +101,7 @@ def search_contackt():
         lst_contact = str_contact.replace(":", "").split()
         if search in lst_contact[i_var]:
             print(f"{str_contact}\n")
+            
 
            
     
@@ -102,17 +112,18 @@ def interfeice():
         pass
     
     var = 0
-    while var != "4":
+    while var != "5":
         print(
             "Возможнве варианты действий:\n"
             "1. Добавить контакт\n"
             "2. Вывести на экран\n"
             "3. Поиск контакта\n"
-            "4. Выход\n"
+            "4. Копировать контакт\n"
+            "5. Выход\n"
             )
         
         var = input("Выберите вариант действия: ")
-        while var not in ("1", "2", "3", "4"):
+        while var not in ("1", "2", "3", "4", "5"):
             print("некоректный вод\n")
             var = input("Выберите вариант действия: ")
             print()
@@ -125,11 +136,14 @@ def interfeice():
             case "3":
                 search_contackt()
             case "4":
+                copy_contact()
+            case "5":
                 print("Good bye!")
-                exit
+                
 
 
 
 if __name__ == "__main__":
     interfeice()
-
+    
+    

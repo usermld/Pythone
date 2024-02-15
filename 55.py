@@ -63,36 +63,26 @@ def print_contacts():
         print(n, contact)
 
 def copy_contact():
-    print(
-            "Возможнве варианты копирования:\n"
-            "1. По фамилии\n"
-            "2. По имени\n"
-            "3. По отчеству\n"
-            "4. По телефону\n"
-            "5. По адресу(город)\n"
-            )
-    var = input("Выберите вариант действия: ")
-    while var not in ("1", "2", "3", "4", "5"):
-        print("некоректный вод")
-        var = input("Выберите вариант поиска:")
-
-        
-    i_var = int(var) - 1
-    
-    search = input("Введите данные для поиска: ").title()
-
+    copy = []
     with open("phone_book.txt", "r", encoding="utf-8") as file:
-            contacs_str = file.read()
-    #print([contacts_str])
-    contacs_list = contacs_str.rstrip().split("\n\n")
-    #print(list_contacs)
+        contacts_str = file.read()
+    #print([contacs_str])
+    contacts_list = contacts_str.rstrip().split("\n\n")
     
-    for str_contact in contacs_list:
-        lst_contact = str_contact.replace(":", "").split()
-        if search in lst_contact[i_var]:
-            print(f"{str_contact} успешно скопирован!\n")
-    with open(f"copy.txt", "a", encoding="utf-8") as copy_file:
-        copy_file.write(f"{str_contact}\n\n")
+    var = int(input("Введите номер контакта который хотите скопировать: "))
+    name_copy_file = input("Название файла в который скопируется этот контакт: ")
+    #i = 0
+    for n, contact in enumerate(contacts_list, 1):
+        #print(n == var, contact)
+        if n == var:
+            copy = contact
+            
+            
+            with open(f"{name_copy_file}.txt", "a", encoding="utf-8") as copy_file:
+                copy_file.write(copy)
+            print("Файл успешно скопирован!\n")
+        
+   
 
 def search_contackt():
     print(
@@ -118,7 +108,8 @@ def search_contackt():
     #print([contacts_str])
     contacs_list = contacs_str.rstrip().split("\n\n")
     #print(list_contacs)
-    
+    for n, contact in enumerate(contacs_str, 1):
+        print(n, contact)
     for str_contact in contacs_list:
         lst_contact = str_contact.replace(":", "").split()
         if search in lst_contact[i_var]:
